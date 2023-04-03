@@ -29,7 +29,6 @@ public class EnemyHandler : MonoBehaviour
         }
     }
 
-    // move to player in a 2D plane
     private void FixedUpdate()
     {
         if (gameObject.tag == "Dead")
@@ -47,6 +46,25 @@ public class EnemyHandler : MonoBehaviour
             scoreUI.text = score.ToString();
             killUI.text = kill.ToString();
 
+            if (score > 199)
+            {
+                GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+                foreach (GameObject enemy in enemies)
+                {
+                    Destroy(enemy);
+                }
+
+                GameObject[] bullets = GameObject.FindGameObjectsWithTag("Bullet");
+
+                foreach (GameObject bullet in bullets)
+                {
+                    Destroy(bullet);
+                }
+
+                done = true;
+            }
+
             done = true;
             return;
         }
@@ -57,7 +75,7 @@ public class EnemyHandler : MonoBehaviour
         Vector2 moveDirection = direction;
         rb.velocity = moveDirection * speed;
 
-        // shoot at player at random intervals
+        // shoot at random intervals (bad method?)
         if (Random.Range(0, 1000) < 10)
         {
             weapon.Fire();

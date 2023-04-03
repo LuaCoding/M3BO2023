@@ -9,6 +9,9 @@ public class PlayerHandler : MonoBehaviour
     public float speed = 20f;
     public Rigidbody2D rb;
     public Weapon weapon;
+    public GameObject spawnhandler;
+    public GameObject status;
+    public GameObject main;
 
     Vector2 moveDirection;
     Vector2 mousePosition;
@@ -35,10 +38,19 @@ public class PlayerHandler : MonoBehaviour
             healthmeter.text = health.ToString();
             if (health <= 0)
             {
+                spawnhandler.SetActive(false);
+
+                GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+                foreach (GameObject enemy in enemies)
+                {
+                    Destroy(enemy);
+                }
+
                 gameObject.tag = "Dead";
                 gameObject.GetComponent<SpriteRenderer>().color = Color.black;
-                Destroy(gameObject, 1f);
-                Debug.Log("You have died! Game Over!");
+                main.SetActive(false);
+                status.SetActive(true);
                 return;
             }
             else

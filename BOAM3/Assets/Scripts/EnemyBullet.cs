@@ -3,6 +3,8 @@ using TMPro;
 
 public class EnemyBullet : MonoBehaviour
 {    
+    // my lazy way of handling enemy damage to the player.
+
     int health;
     private void OnCollisionEnter2D(Collision2D collision)
     {

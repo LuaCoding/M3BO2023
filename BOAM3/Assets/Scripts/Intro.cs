@@ -10,7 +10,7 @@ public class Intro : MonoBehaviour
     public GameObject spawnzone;
     public Button button;
     public GameObject intro;
-    // Start is called before the first frame update
+
     void Start()
     {
         Button btn = button.GetComponent<Button>();
@@ -18,7 +18,6 @@ public class Intro : MonoBehaviour
         Debug.Log("Added listener!");
     }
 
-    // Update is called once per frame
     void OnClick()
     {
         Debug.Log("Clicked!");

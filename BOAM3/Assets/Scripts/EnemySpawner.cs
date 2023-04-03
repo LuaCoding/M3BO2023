@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class EnemySpawner : MonoBehaviour
 {
-    // spawn enemies
     public GameObject enemyPrefab;
     public Transform spawnPoint;
     public float spawnRate = 2f;
@@ -15,7 +15,7 @@ public class EnemySpawner : MonoBehaviour
         if (Time.time >= nextSpawn)
         {
             enemyPrefab.GetComponent<EnemyHandler>().enabled = true;
-            // insntantiate enemy at random position within spawnpoint
+
             Vector2 randompos = new Vector2(Random.Range(-11f,-7f), Random.Range(-4f, 4f));
             Instantiate(enemyPrefab, randompos, Quaternion.identity);
 
