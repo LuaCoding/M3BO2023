@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class EnemyHandler : MonoBehaviour
 {
@@ -8,6 +9,10 @@ public class EnemyHandler : MonoBehaviour
     public float speed = 2f;
     public Rigidbody2D rb;
     public Transform player;
+    public Weapon weapon;
+    public TextMeshProUGUI scoreUI;
+    public TextMeshProUGUI killUI;
+    bool done = false;
 
     // ----------- End -------------
 
@@ -28,7 +33,21 @@ public class EnemyHandler : MonoBehaviour
     private void FixedUpdate()
     {
         if (gameObject.tag == "Dead")
-        {
+        {   
+            if (done == true)
+            {
+                return;
+            }
+            int score = int.Parse(scoreUI.text);
+            int kill = int.Parse(killUI.text);
+
+            score += 10;
+            kill += 1;
+
+            scoreUI.text = score.ToString();
+            killUI.text = kill.ToString();
+
+            done = true;
             return;
         }
         Vector2 direction = player.position - transform.position;
@@ -37,5 +56,11 @@ public class EnemyHandler : MonoBehaviour
         direction.Normalize();
         Vector2 moveDirection = direction;
         rb.velocity = moveDirection * speed;
+
+        // shoot at player at random intervals
+        if (Random.Range(0, 1000) < 10)
+        {
+            weapon.Fire();
+        }
     }
 }

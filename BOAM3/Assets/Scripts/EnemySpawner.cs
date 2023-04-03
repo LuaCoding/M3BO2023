@@ -14,7 +14,11 @@ public class EnemySpawner : MonoBehaviour
     {
         if (Time.time >= nextSpawn)
         {
-            Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
+            enemyPrefab.GetComponent<EnemyHandler>().enabled = true;
+            // insntantiate enemy at random position within spawnpoint
+            Vector2 randompos = new Vector2(Random.Range(-11f,-7f), Random.Range(-4f, 4f));
+            Instantiate(enemyPrefab, randompos, Quaternion.identity);
+
             nextSpawn = Time.time + 1f / spawnRate;
         }
     }

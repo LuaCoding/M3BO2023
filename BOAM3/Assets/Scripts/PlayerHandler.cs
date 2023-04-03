@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PlayerHandler : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class PlayerHandler : MonoBehaviour
 
     Vector2 moveDirection;
     Vector2 mousePosition;
+    public TextMeshProUGUI healthmeter;
     // ----------- End --------------
 
     void Update()
@@ -25,6 +27,26 @@ public class PlayerHandler : MonoBehaviour
 
         moveDirection = new Vector2(moveX, moveY).normalized;
         mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        if (gameObject.tag == "Hurt")
+        {
+            int health = int.Parse(healthmeter.text);
+            health -= 10;
+            healthmeter.text = health.ToString();
+            if (health <= 0)
+            {
+                gameObject.tag = "Dead";
+                gameObject.GetComponent<SpriteRenderer>().color = Color.black;
+                Destroy(gameObject, 1f);
+                Debug.Log("You have died! Game Over!");
+                return;
+            }
+            else
+            {
+                gameObject.tag = "Player";
+            }
+            gameObject.tag = "Player";
+        }
     }
 
     private void FixedUpdate()
