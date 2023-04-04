@@ -48,21 +48,7 @@ public class EnemyHandler : MonoBehaviour
 
             if (score > 199)
             {
-                GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-
-                foreach (GameObject enemy in enemies)
-                {
-                    Destroy(enemy);
-                }
-
-                GameObject[] bullets = GameObject.FindGameObjectsWithTag("Bullet");
-
-                foreach (GameObject bullet in bullets)
-                {
-                    Destroy(bullet);
-                }
-
-                done = true;
+                Destroy(gameObject);
             }
 
             done = true;
