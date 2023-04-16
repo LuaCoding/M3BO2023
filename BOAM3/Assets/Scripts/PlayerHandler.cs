@@ -17,6 +17,8 @@ public class PlayerHandler : MonoBehaviour
     public TextMeshProUGUI healthmeter;
     public TextMeshProUGUI scoreUI;
     public TextMeshProUGUI scorelabel;
+    bool grapeshot = false;
+    bool rapidfire = false;
     // ----------- End --------------
 
     void Update()
@@ -24,9 +26,17 @@ public class PlayerHandler : MonoBehaviour
         float moveX = Input.GetAxis("Horizontal");
         float moveY = Input.GetAxis("Vertical");
 
-        if(Input.GetMouseButtonDown(0)){
-        
-            weapon.Fire();
+        if(Input.GetMouseButtonDown(0) && rapidfire == false)
+        {
+            if (grapeshot == true)
+            {
+                weapon.Grapeshot();
+                return;
+            }
+            else
+            {
+                weapon.Fire();
+            }
         }
 
         moveDirection = new Vector2(moveX, moveY).normalized;
@@ -89,7 +99,7 @@ public class PlayerHandler : MonoBehaviour
     
         Vector2 lookDirection = mousePosition - rb.position;
         float angle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg - 90f;
-        rb.rotation = angle + 270f;
+        rb.rotation = angle;
 
     }
 
@@ -99,7 +109,11 @@ public class PlayerHandler : MonoBehaviour
 
         if (trigger.gameObject.tag == "Powerup")
         {
-            if(trigger.gameObject.name == "Health(Clone)")
+            if (trigger.gameObject.name == "Grapeshot(Clone)")
+            {
+                grapeshot = true;
+            }
+            else if(trigger.gameObject.name == "Health(Clone)")
             {
                 int health = int.Parse(healthmeter.text);
                 health += 50;
@@ -107,9 +121,12 @@ public class PlayerHandler : MonoBehaviour
             }
             else if (trigger.gameObject.name == "Speed(Clone)")
             {
-                speed += 10f;
+                speed += 5f;
             }
-
+            else if(trigger.gameObject.name == "Rapidfire(Clone)")
+            {
+                rapidfire = true;
+            }
             Destroy(trigger.gameObject);
         }
     }

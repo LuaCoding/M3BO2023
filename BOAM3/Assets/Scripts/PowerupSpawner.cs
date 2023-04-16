@@ -11,16 +11,14 @@ public class PowerupSpawner : MonoBehaviour
     public Transform newPup;
     bool spawned = false;
     void Update()
-    {  
+    {        
         if (Mathf.Round(Time.time) % 5 == 0 && intro.activeSelf == false && spawned == false)
         {
-            randomPup = Random.Range(0, 1);
+            randomPup = Random.Range(0, 3);
 
             newPup = powerupPrefab.transform.GetChild(randomPup); // random powerup from child index
-            Vector2 randompos = new Vector2(Random.Range(-11f,11f), Random.Range(-4f, 4f));
+            Vector2 randompos = new Vector2(Random.Range(-11f,-7f), Random.Range(-4f, 4f));
             Instantiate(newPup, randompos, Quaternion.identity);
-            Instantiate(powerupPrefab, randompos, Quaternion.identity);
-
             spawned = true;
         }
 

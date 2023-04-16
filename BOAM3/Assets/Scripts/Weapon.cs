@@ -21,11 +21,11 @@ public class Weapon : MonoBehaviour
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         rb.AddForce(firePoint.up * force, ForceMode2D.Impulse);
 
-        GameObject bullet2 = Instantiate(bulletPrefab, firePoint.position * new Vector2(0.1f, 0.1f), firePoint.rotation);
+        GameObject bullet2 = Instantiate(bulletPrefab, firePoint.position * new Vector2(0,5), firePoint.rotation * new Quaternion(0,0,0,-5f));
         Rigidbody2D rb2 = bullet2.GetComponent<Rigidbody2D>();
         rb2.AddForce(firePoint.up * force, ForceMode2D.Impulse);
 
-        GameObject bullet3 = Instantiate(bulletPrefab, firePoint.position * new Vector2(0.2f, 0.2f), firePoint.rotation);
+        GameObject bullet3 = Instantiate(bulletPrefab, firePoint.position * new Vector2(0,-5), firePoint.rotation * new Quaternion(0,0,0,5f));
         Rigidbody2D rb3 = bullet3.GetComponent<Rigidbody2D>();
         rb3.AddForce(firePoint.up * force, ForceMode2D.Impulse);
     }
