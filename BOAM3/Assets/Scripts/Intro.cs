@@ -8,6 +8,7 @@ public class Intro : MonoBehaviour
     public GameObject player;
     public GameObject main;
     public GameObject spawnzone;
+    public GameObject outerwalls;
     public Button button;
     public GameObject intro;
 
@@ -23,6 +24,7 @@ public class Intro : MonoBehaviour
         Debug.Log("Clicked!");
         player.SetActive(true);
         main.SetActive(true);
+        outerwalls.SetActive(true);
         spawnzone.SetActive(true);
         intro.SetActive(false);
     }

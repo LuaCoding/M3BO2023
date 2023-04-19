@@ -11,6 +11,10 @@ public class Bullet : MonoBehaviour
 
             Destroy(gameObject);
             collision.gameObject.GetComponent<SpriteRenderer>().color = Color.black;
+            foreach (Transform child in collision.gameObject.transform)
+            {
+                child.gameObject.GetComponent<SpriteRenderer>().color = Color.black;
+            }
             Destroy(collision.gameObject, 1f);
         }
         else
