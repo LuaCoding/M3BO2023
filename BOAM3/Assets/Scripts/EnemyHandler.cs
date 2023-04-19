@@ -51,7 +51,7 @@ public class EnemyHandler : MonoBehaviour
             return;
         }
         Vector2 direction = player.position - transform.position;
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + 180f;
         rb.rotation = angle;
         direction.Normalize();
         Vector2 moveDirection = direction;
